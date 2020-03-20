@@ -82,11 +82,13 @@ function whiteArray(){
 
 sortArray();
 whiteArray();
-// moving pieces
 
 
+
+
+
+// moving pieces------------------------------------
 canvas.addEventListener('mousedown', function(event){
-
     farge=null;
     for(i in Sort){
         if(Sort[i].xPos<(event.offsetX) && (Sort[i].xPos+width)>(event.offsetX)
@@ -112,9 +114,6 @@ let height = canvas.width/8;
 
 
 function onMousemove(event){
-    console.log(event);
-    console.log(farge);
-    console.log(index);
     if(farge=="s"){
         c.clearRect(0,0,canvas.width, canvas.height); // clearing canvas
         Sort[index].xPos =event.offsetX- width/2; 
@@ -140,4 +139,27 @@ function onMousemove(event){
 function onMouseuop(event){
     canvas.removeEventListener('mousemove', onMousemove); 
     canvas.removeEventListener('mouseup', onMouseuop); 
+
+    xPosLast= pos.returnPosition(event.offsetX,event.offsetY)[0];
+    yPosLast= pos.returnPosition(event.offsetX,event.offsetY)[1];
+
+    if(farge=='h'){
+        Hvit[index].xPos = xPosLast;
+        Hvit[index].yPos = yPosLast; 
+    }
+
+    else if(farge=='s'){
+        Sort[index].xPos = xPosLast;
+        Sort[index].yPos = yPosLast; 
+    }
+
+
+    c.clearRect(0,0,canvas.width, canvas.height);
+    new ChessBoard();
+    for(j in Hvit){
+        Hvit[j].draw(); 
+        Sort[j].draw();
+    }
 }
+
+
