@@ -119,19 +119,38 @@ class Position{
     }
 
 
-    checkPosition(Sort, Hvit, piece){
+    checkPosition(Sort, Hvit, piece, startpos){
+
         if (piece.farge == 's'){
             for(i in Hvit){
                 if(piece.xPos == Hvit[i].xPos && piece.yPos == Hvit[i].yPos){
-                    Hvit.splice(i,1)
+                    Hvit.splice(i,1);
+                }
+            }
+
+            for(i in Sort){
+                if(piece.xPos == Sort[i].xPos && piece.yPos == Sort[i].yPos){
+                    if(Sort[i] != piece){
+                        piece.xPos = startpos[0];
+                        piece.yPos = startpos[1];
+                    } 
                 }
             }
         }
-
         if (piece.farge == 'h'){
             for(i in Sort){
                 if(piece.xPos == Sort[i].xPos && piece.yPos == Sort[i].yPos){
                     Sort.splice(i,1)
+                }
+            }
+            
+            for(i in Hvit){
+                if(piece.xPos == Hvit[i].xPos && piece.yPos == Hvit[i].yPos){
+                    if(Hvit[i] != piece){
+                        console.log("yeah");
+                        piece.xPos = startpos[0];
+                        piece.yPos = startpos[1];
+                    } 
                 }
             }
         }

@@ -101,6 +101,7 @@ canvas.addEventListener('mousedown', function(event){
         && Sort[i].yPos<(event.offsetY) && (Sort[i].yPos+width)>(event.offsetY)){
             index= i; 
             farge="s"; 
+            startpos=[Sort[i].xPos, Sort[i].yPos];
         }
     }  
     for(i in Hvit){
@@ -108,6 +109,7 @@ canvas.addEventListener('mousedown', function(event){
         && Hvit[i].yPos<(event.offsetY) && (Hvit[i].yPos+width)>(event.offsetY)){
             index= i;
             farge = "h";
+            startpos = [Hvit[i].xPos, Hvit[i].yPos];
         }
     }
     
@@ -149,19 +151,18 @@ function onMouseuop(event){
     if(farge=='h'){
         Hvit[index].xPos = xPosLast;
         Hvit[index].yPos = yPosLast; 
-        pos.checkPosition(Sort, Hvit, Hvit[index])
+        pos.checkPosition(Sort, Hvit, Hvit[index], startpos);
     }
 
     else if(farge=='s'){
         Sort[index].xPos = xPosLast;
         Sort[index].yPos = yPosLast; 
-        pos.checkPosition(Sort, Hvit, Sort[index])
+        pos.checkPosition(Sort, Hvit, Sort[index], startpos);
     }
     //draw
     c.clearRect(0,0,canvas.width, canvas.height);
     new ChessBoard();
     drawPieces();
-    console.log(Hvit);
 }
 
 
