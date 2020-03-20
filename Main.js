@@ -7,6 +7,7 @@ canvas.height = window.innerWidth/2;
 let c = canvas.getContext('2d');
 
 
+
 // importing all picture paths
 
 let sBonde = 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_pdt60.png';
@@ -22,11 +23,9 @@ let hLoper = 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Chess_blt60.pn
 let hDronning = 'https://upload.wikimedia.org/wikipedia/commons/4/49/Chess_qlt60.png'; 
 let hKing = 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Chess_klt60.png';
 
-
-
-
 chessboard = new ChessBoard();
-pos = new Position(canvas); 
+pos = new Position(canvas);
+
 
 // initializing all new Pieces
 
@@ -34,46 +33,45 @@ function sortArray(){
     Sort= [];
 
     for (var i = 'a'.charCodeAt(0); i <= 'h'.charCodeAt(0); i++) {
-        Sort.push(new Pieces(sBonde,pos.getposition(String.fromCharCode(i),2)[0],pos.getposition(String.fromCharCode(i),2)[1]));
+        Sort.push(new Pieces(sBonde,pos.getposition(String.fromCharCode(i),2)[0],pos.getposition(String.fromCharCode(i),2)[1], 's'));
     }
 
-    Sort.push(new Pieces(sTorn,pos.getposition('a',1)[0],pos.getposition('a',1)[1]));
-    Sort.push(new Pieces(sTorn,pos.getposition('h',1)[0],pos.getposition('h',1)[1]));
+    Sort.push(new Pieces(sTorn,pos.getposition('a',1)[0],pos.getposition('a',1)[1],'s'));
+    Sort.push(new Pieces(sTorn,pos.getposition('h',1)[0],pos.getposition('h',1)[1],'s'));
 
-    Sort.push(new Pieces(sHest,pos.getposition('b',1)[0],pos.getposition('b',1)[1]));
-    Sort.push(new Pieces(sHest,pos.getposition('g',1)[0],pos.getposition('g',1)[1]));
+    Sort.push(new Pieces(sHest,pos.getposition('b',1)[0],pos.getposition('b',1)[1],'s'));
+    Sort.push(new Pieces(sHest,pos.getposition('g',1)[0],pos.getposition('g',1)[1],'s'));
 
 
-    Sort.push(new Pieces(sLoper,pos.getposition('c',1)[0],pos.getposition('c',1)[1]));
-    Sort.push(new Pieces(sLoper,pos.getposition('f',1)[0],pos.getposition('f',1)[1]));
+    Sort.push(new Pieces(sLoper,pos.getposition('c',1)[0],pos.getposition('c',1)[1],'s'));
+    Sort.push(new Pieces(sLoper,pos.getposition('f',1)[0],pos.getposition('f',1)[1],'s'));
 
-    Sort.push(new Pieces(sDronning,pos.getposition('d',1)[0],pos.getposition('d',1)[1]));
-    Sort.push(new Pieces(sKonge,pos.getposition('e',1)[0],pos.getposition('e',1)[1]));
+    Sort.push(new Pieces(sDronning,pos.getposition('d',1)[0],pos.getposition('d',1)[1],'s'));
+    Sort.push(new Pieces(sKonge,pos.getposition('e',1)[0],pos.getposition('e',1)[1],'s'));
 
     for(i in Sort){
         Sort[i].draw();
     }
-
     return Sort;
 }
 
 function whiteArray(){
     Hvit= []; 
     for (var i = 'a'.charCodeAt(0); i <= 'h'.charCodeAt(0); i++) {
-        Hvit.push(new Pieces(hBonde,pos.getposition(String.fromCharCode(i),7)[0],pos.getposition(String.fromCharCode(i),7)[1]));
+        Hvit.push(new Pieces(hBonde,pos.getposition(String.fromCharCode(i),7)[0],pos.getposition(String.fromCharCode(i),7)[1],'h'));
     }
 
-    Hvit.push(new Pieces(htorn,pos.getposition('a',8)[0],pos.getposition('a',8)[1]));
-    Hvit.push(new Pieces(htorn,pos.getposition('h',8)[0],pos.getposition('h',8)[1]));
+    Hvit.push(new Pieces(htorn,pos.getposition('a',8)[0],pos.getposition('a',8)[1],'h'));
+    Hvit.push(new Pieces(htorn,pos.getposition('h',8)[0],pos.getposition('h',8)[1],'h'));
 
-    Hvit.push(new Pieces(hHest,pos.getposition('b',8)[0],pos.getposition('b',8)[1]));
-    Hvit.push(new Pieces(hHest,pos.getposition('g',8)[0],pos.getposition('g',8)[1]));
+    Hvit.push(new Pieces(hHest,pos.getposition('b',8)[0],pos.getposition('b',8)[1],'h'));
+    Hvit.push(new Pieces(hHest,pos.getposition('g',8)[0],pos.getposition('g',8)[1],'h'));
 
-    Hvit.push(new Pieces(hLoper,pos.getposition('c',8)[0],pos.getposition('c',8)[1]));
-    Hvit.push(new Pieces(hLoper,pos.getposition('f',8)[0],pos.getposition('f',8)[1]));
+    Hvit.push(new Pieces(hLoper,pos.getposition('c',8)[0],pos.getposition('c',8)[1],'h'));
+    Hvit.push(new Pieces(hLoper,pos.getposition('f',8)[0],pos.getposition('f',8)[1],'h'));
 
-    Hvit.push(new Pieces(hDronning,pos.getposition('d',8)[0],pos.getposition('d',8)[1]));
-    Hvit.push(new Pieces(hKing,pos.getposition('e',8)[0],pos.getposition('e',8)[1]));
+    Hvit.push(new Pieces(hDronning,pos.getposition('d',8)[0],pos.getposition('d',8)[1],'h'));
+    Hvit.push(new Pieces(hKing,pos.getposition('e',8)[0],pos.getposition('e',8)[1],'h'));
     for(i in Hvit){
         Hvit[i].draw();
     }
@@ -84,6 +82,14 @@ sortArray();
 whiteArray();
 
 
+function drawPieces(){
+    for(i in Sort){
+        Sort[i].draw();
+    }
+    for(i in Hvit){
+        Hvit[i].draw();
+    }
+}
 
 
 
@@ -96,12 +102,15 @@ canvas.addEventListener('mousedown', function(event){
             index= i; 
             farge="s"; 
         }
-        else if(Hvit[i].xPos<(event.offsetX) && (Hvit[i].xPos+width)>(event.offsetX)
+    }  
+    for(i in Hvit){
+        if(Hvit[i].xPos<(event.offsetX) && (Hvit[i].xPos+width)>(event.offsetX)
         && Hvit[i].yPos<(event.offsetY) && (Hvit[i].yPos+width)>(event.offsetY)){
             index= i;
             farge = "h";
         }
     }
+    
     canvas.addEventListener('mousemove', onMousemove); 
     canvas.addEventListener('mouseup', onMouseuop); 
 })
@@ -119,20 +128,14 @@ function onMousemove(event){
         Sort[index].xPos =event.offsetX- width/2; 
         Sort[index].yPos = event.offsetY-width/2;
         new ChessBoard();
-        for(j in Sort){
-            Sort[j].draw(); 
-            Hvit[j].draw();
-        }
+        drawPieces();
     }
     else if(farge== "h"){
         c.clearRect(0,0,canvas.width, canvas.height); // clearing canvas
         Hvit[index].xPos =event.offsetX- width/2; 
         Hvit[index].yPos = event.offsetY-width/2;
         new ChessBoard();
-        for(j in Hvit){
-            Hvit[j].draw(); 
-            Sort[j].draw();
-        }
+        drawPieces();
     }
 }
 
@@ -146,20 +149,19 @@ function onMouseuop(event){
     if(farge=='h'){
         Hvit[index].xPos = xPosLast;
         Hvit[index].yPos = yPosLast; 
+        pos.checkPosition(Sort, Hvit, Hvit[index])
     }
 
     else if(farge=='s'){
         Sort[index].xPos = xPosLast;
         Sort[index].yPos = yPosLast; 
+        pos.checkPosition(Sort, Hvit, Sort[index])
     }
-
-
+    //draw
     c.clearRect(0,0,canvas.width, canvas.height);
     new ChessBoard();
-    for(j in Hvit){
-        Hvit[j].draw(); 
-        Sort[j].draw();
-    }
+    drawPieces();
+    console.log(Hvit);
 }
 
 
