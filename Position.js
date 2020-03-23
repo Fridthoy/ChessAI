@@ -59,63 +59,63 @@ class Position{
 
 
     returnPosition(x,y){
-        this.letter= null; 
+        this.letter= null;
 
-        if(0<x && x<this.width){
+        if(0<=x && x<this.width){
             this.letter='a';
         }
 
-        else if(this.width<x && x< this.width*2){
+        else if(this.width<=x && x< this.width*2){
             this.letter= 'b';
         }
-        else if(this.width*2<x && x< this.width*3){
+        else if(this.width*2<=x && x< this.width*3){
             this.letter= 'c';
         }
-        else if(this.width*3<x && x< this.width*4){
+        else if(this.width*3<=x && x< this.width*4){
             this.letter= 'd';
         }
-        else if(this.width*4<x && x< this.width*5){
+        else if(this.width*4<=x && x< this.width*5){
             this.letter= 'e';
         }
-        else if(this.width*5<x && x< this.width*6){
+        else if(this.width*5<=x && x< this.width*6){
             this.letter= 'f';
         }
-        else if(this.width*6<x && x< this.width*7){
+        else if(this.width*6<=x && x< this.width*7){
             this.letter= 'g';
         }
-        else if(this.width*7<x && x< this.width*8){
+        else if(this.width*7<=x && x<= this.width*8){
             this.letter= 'h';
         }
 
         this.number= null;
 
-        if(0<y && y<this.width){
+        if(0<=y && y<this.width){
             this.number=1;
         }
-        else if(this.width<y && y< this.width*2){
+        else if(this.width<=y && y< this.width*2){
             this.number= 2;
         }
-        else if(this.width*2<y && y< this.width*3){
+        else if(this.width*2<=y && y< this.width*3){
             this.number= 3;
         }
-        else if(this.width*3<y && y< this.width*4){
+        else if(this.width*3<=y && y< this.width*4){
             this.number= 4;
         }
-        else if(this.width*4<y && y< this.width*5){
+        else if(this.width*4<=y && y< this.width*5){
             this.number= 5;
         }
-        else if(this.width*5<y && y< this.width*6){
+        else if(this.width*5<=y && y< this.width*6){
             this.number= 6;
         }
-        else if(this.width*6<y && y< this.width*7){
+        else if(this.width*6<=y && y< this.width*7){
             this.number= 7;
         }
-        else if(this.width*7<y && y< this.width*8){
+        else if(this.width*7<=y && y<= this.width*8){
             this.number= 8;
         }
 
 
-    return this.getposition(this.letter, this.number);
+    return [this.letter, this.number];
     }
 
 
