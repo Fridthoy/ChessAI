@@ -79,6 +79,18 @@ function whiteArray(){
 
 sortArray();
 whiteArray();
+addArrays(); 
+
+function addArrays(){
+    for(i in Sort){
+        Sort[i].sortArray = Sort;
+        Sort[i].hvitArray = Hvit; 
+    }
+    for(i in Hvit){
+        Hvit[i].sortArray = Sort; 
+        Hvit[i].hvitArray = Hvit; 
+    }
+}
 
 
 function drawPieces(){
@@ -92,7 +104,7 @@ function drawPieces(){
 
 
 function myPown(){
-    
+
 }
 // moving pieces------------------------------------
 canvas.addEventListener('mousedown', function(event){

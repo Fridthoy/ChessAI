@@ -236,24 +236,126 @@ class Pown extends Pieces{
 
         if(this.count ==0){
             if(this.farge == 's'){
-                muligheter.push([String.fromCharCode(bokstav),number+1]);
-                muligheter.push([String.fromCharCode(bokstav),number+2]);     
+                for(let k in this.hvitArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[0] 
+                    && number+1 == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.hvitArray.length-1){
+                        muligheter.push([String.fromCharCode(bokstav),number+1]);
+                    }
+                }
+
+                for(let k in this.hvitArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[0] 
+                    && number+2 == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.hvitArray.length-1){
+                        muligheter.push([String.fromCharCode(bokstav),number+2]);
+                    }
+                }
             }
             else{
-                muligheter.push([String.fromCharCode(bokstav),number-1]);
-                muligheter.push([String.fromCharCode(bokstav),number-2]);     
+                for(let k in this.sortArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
+                    && number-1 == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.sortArray.length-1){
+                        muligheter.push([String.fromCharCode(bokstav),number-1]);
+                    }
+                }
+                for(let k in this.sortArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
+                    && number-2 == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.sortArray.length-2){
+                        muligheter.push([String.fromCharCode(bokstav),number-2]);
+                    }
+                }
+                
+                /*
+                for(let k in this.sortArray){
+                    if(String.fromCharCode(bokstav) != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
+                    && number-1 != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0]){
+                        muligheter.push([String.fromCharCode(bokstav),number-1]);
+                    }
+                    if(String.fromCharCode(bokstav) != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
+                    && number-2 != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0]){
+                        muligheter.push([String.fromCharCode(bokstav),number-2]);        
+                    }
+                }
+                */
             }
        }
         else{
             if(this.farge =='s'){
-                muligheter.push([String.fromCharCode(bokstav), number+1]);
+                for(let k in this.hvitArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[0] 
+                    && number+1 == this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.hvitArray.length-1){
+                        muligheter.push([String.fromCharCode(bokstav),number+1]);
+                    }
+                }
             }
             else{
-                muligheter.push([String.fromCharCode(bokstav), number-1]);               
+                for(let k in this.sortArray){
+                    if(letterPos[0] == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
+                    && number-1 == this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[1]){
+                        break;
+                    }
+
+                    else if(k == this.sortArray.length-1){
+                        muligheter.push([String.fromCharCode(bokstav),number-1]);
+                    }
+                }              
             }
         }
-        // checking if it can take other player 
 
+        console.log(muligheter);
+
+        // checking if it can take other player 
+        let taMuligheter = []; 
+        if(this.farge =='s'){
+            taMuligheter.push([String.fromCharCode(bokstav-1), number+1]);
+            taMuligheter.push([String.fromCharCode(bokstav+1), number+1]);
+        
+            for(let j in taMuligheter){
+                if(taMuligheter[j][0]== lastpos[0] && taMuligheter[j][1] == lastpos[1]){
+                    for(let k in this.hvitArray){
+                        if(this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[0] == lastpos[0] 
+                        && this.pos.returnPosition(this.hvitArray[k].xPos, this.hvitArray[k].yPos)[1] == lastpos[1]){
+                            return true; 
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            taMuligheter.push([String.fromCharCode(bokstav-1), number-1]);
+            taMuligheter.push([String.fromCharCode(bokstav+1), number-1]);
+
+            for(let j in taMuligheter){
+                if(taMuligheter[j][0]== lastpos[0] && taMuligheter[j][1] == lastpos[1]){
+                    for(let k in this.sortArray){
+                        if(this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] == lastpos[0] 
+                        && this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[1] == lastpos[1]){
+                            return true; 
+                        }
+                    }
+                }
+            }
+
+        }
 
         for(let i in muligheter){
             if(muligheter[i][0]== lastpos[0] && muligheter[i][1] == lastpos[1]){
