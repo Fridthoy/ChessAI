@@ -10,6 +10,7 @@ class Pieces{
         this.width = canvas.width/8; 
         this.height = canvas.width/8; 
         this.image = new Image(); 
+        
     }
     draw(){
         this.image.src = this.path; 
@@ -18,8 +19,7 @@ class Pieces{
 
     drawImage1(){
         c.drawImage(this.image, this.xPos, this.yPos, this.width, this.height); 
-    }
-   
+    }   
 }
 
 
@@ -30,31 +30,68 @@ class Queen extends Pieces{
 
     checkMove(lastpos){
         // diagonal 
+        this.fellesarray = this.sortArray.concat(this.hvitArray); 
         let letterPos= this.pos.returnPosition(this.xPos, this.yPos);
         let bokstav =letterPos[0].charCodeAt(0);
         let number = letterPos[1];
         let muligheter=[];
         //to the left
         let okning1= 1;
+        let check1= true;
+        let check2 = true;
         for(let i= bokstav-1; i>= 97; i--){
-
             if(number+okning1 <= 8){
-                muligheter.push([String.fromCharCode(i), number + okning1]);    
+                for(let j in this.fellesarray){
+                    if(this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[0]==String.fromCharCode(i) && 
+                    this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[1] == number + okning1){
+                        check1 = false;
+                    }
+                }
+                if(check1){
+                    muligheter.push([String.fromCharCode(i), number + okning1]);
+                } 
+                    
             }
+            
             if(number-okning1>=1){
-                muligheter.push([String.fromCharCode(i), number -okning1]);        
+                for(let j in this.fellesarray){
+                    if(this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[0]==String.fromCharCode(i) && 
+                    this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[1] == number - okning1){
+                        check2 = false;
+                    }
+                }
+                if(check2){
+                    muligheter.push([String.fromCharCode(i), number -okning1]);         
+                }
             }
-        okning1++;
+            okning1++;
         }
         let okning2=1;
         // to the right
+        check1= true; 
+        check2 = true; 
         for(let i= bokstav+1; i<= 104; i++){
-
             if(number+okning2 <= 8){
-                muligheter.push([String.fromCharCode(i), number + okning2]);    
+                for(let j in this.fellesarray){
+                    if(this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[0]==String.fromCharCode(i) && 
+                    this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[1] == number + okning2){
+                        check1 = false;
+                    }
+                }
+                if(check1){
+                    muligheter.push([String.fromCharCode(i), number + okning2]);
+                } 
             }
             if(number-okning2>=1){
-                muligheter.push([String.fromCharCode(i), number -okning2]);        
+                for(let j in this.fellesarray){
+                    if(this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[0]==String.fromCharCode(i) && 
+                    this.pos.returnPosition(this.fellesarray[j].xPos, this.fellesarray[j].yPos)[1] == number - okning2){
+                        check2 = false;
+                    }
+                }
+                if(check2){
+                    muligheter.push([String.fromCharCode(i), number - okning2]);
+                } 
             }
         okning2++;
         }
@@ -279,19 +316,6 @@ class Pown extends Pieces{
                         muligheter.push([String.fromCharCode(bokstav),number-2]);
                     }
                 }
-                
-                /*
-                for(let k in this.sortArray){
-                    if(String.fromCharCode(bokstav) != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
-                    && number-1 != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0]){
-                        muligheter.push([String.fromCharCode(bokstav),number-1]);
-                    }
-                    if(String.fromCharCode(bokstav) != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0] 
-                    && number-2 != this.pos.returnPosition(this.sortArray[k].xPos, this.sortArray[k].yPos)[0]){
-                        muligheter.push([String.fromCharCode(bokstav),number-2]);        
-                    }
-                }
-                */
             }
        }
         else{

@@ -147,7 +147,6 @@ class Position{
             for(i in Hvit){
                 if(piece.xPos == Hvit[i].xPos && piece.yPos == Hvit[i].yPos){
                     if(Hvit[i] != piece){
-                        console.log("yeah");
                         piece.xPos = startpos[0];
                         piece.yPos = startpos[1];
                     } 
